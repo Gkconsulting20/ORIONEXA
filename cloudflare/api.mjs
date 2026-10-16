@@ -1,4 +1,5 @@
 import { CHAT_SYSTEM_PROMPT, NEWSLETTER_SYSTEM_PROMPT } from "./prompts.mjs";
+import { mergeNewsletterIndexes } from "./newsletter-index.mjs";
 
 const AI_MODEL = "@cf/qwen/qwen3-30b-a3b-fp8";
 const SESSION_COOKIE = "orionexa_admin";
@@ -183,10 +184,9 @@ async function listNewsletters(request, env) {
       .all()
   ]);
 
-  const newsletters = [
-    ...staticIndex,
-    ...(generatedResult.results || []).map(fromDatabaseNewsletter)
-  ].sort((left, right) => Number(right.issue) - Number(left.issue));
+  const newsletters = mergeNewsletterIndexes(
+    staticIndex, (generatedResult.results || []).map(fromDatabaseNewsletter)
+  );
 
   return json({ success: true, newsletters });
 }
@@ -400,10 +400,9 @@ async function getNewsletterForSending(request, env) {
       )
       .all()
   ]);
-  const newsletters = [
-    ...staticIndex,
-    ...(generatedResult.results || []).map(fromDatabaseNewsletter)
-  ].sort((left, right) => Number(right.issue) - Number(left.issue));
+  const newsletters = mergeNewsletterIndexes(
+    staticIndex, (generatedResult.results || []).map(fromDatabaseNewsletter)
+  );
 
   let newsletter = newsletters[0];
   if (!newsletter) return null;
