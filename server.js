@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { Pool } = require('pg');
 const { handleChatMessage } = require('./routes/chatbot');
+const { registerAdminAuth, requireAdmin } = require('./lib/adminAuth');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
@@ -25,6 +26,9 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
+
+registerAdminAuth(app);
+app.get('/admin', (req, res) => res.redirect('/newsletter?admin=true'));
 
 app.get('/services', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'services.html'));
@@ -173,7 +177,7 @@ app.get('/api/newsletters', (req, res) => {
   }
 });
 
-app.get('/api/newsletters/:issue', (req, res) => {
+app.get('/api/newsletters/:issue(\\d+)', (req, res) => {
   const issue = req.params.issue;
   const filePath = path.join(__dirname, 'data', 'newsletters', `newsletter-${issue}.html`);
   if (fs.existsSync(filePath)) {
@@ -183,7 +187,7 @@ app.get('/api/newsletters/:issue', (req, res) => {
   }
 });
 
-app.post('/api/newsletters/generate', async (req, res) => {
+app.post('/api/newsletters/generate', requireAdmin, async (req, res) => {
   try {
     const { generateNewsletter } = require('./scripts/generateNewsletter');
     const result = await generateNewsletter();
@@ -194,7 +198,7 @@ app.post('/api/newsletters/generate', async (req, res) => {
   }
 });
 
-app.post('/api/newsletters/send', async (req, res) => {
+app.post('/api/newsletters/send', requireAdmin, async (req, res) => {
   try {
     const { runWeeklyNewsletter } = require('./scripts/sendWeeklyNewsletter');
     const result = await runWeeklyNewsletter();
@@ -205,7 +209,7 @@ app.post('/api/newsletters/send', async (req, res) => {
   }
 });
 
-app.get('/api/newsletters/test-email', async (req, res) => {
+app.get('/api/newsletters/test-email', requireAdmin, async (req, res) => {
   try {
     const { testEmailConnection } = require('./lib/emailSender');
     const result = await testEmailConnection();
@@ -215,24 +219,13 @@ app.get('/api/newsletters/test-email', async (req, res) => {
   }
 });
 
-app.get('/api/newsletter-subscribers/count', async (req, res) => {
+app.get('/api/newsletter-subscribers/count', requireAdmin, async (req, res) => {
   try {
     const result = await pool.query('SELECT COUNT(*) FROM newsletter_subscribers WHERE active = true');
     res.json({ count: parseInt(result.rows[0].count, 10) });
   } catch (error) {
     console.error('Count subscribers error:', error);
     res.json({ count: 0 });
-  }
-});
-
-app.post('/api/admin/login', (req, res) => {
-  const { password } = req.body;
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
-  
-  if (ADMIN_PASSWORD && password === ADMIN_PASSWORD) {
-    res.json({ success: true });
-  } else {
-    res.json({ success: false, message: 'Mot de passe incorrect' });
   }
 });
 

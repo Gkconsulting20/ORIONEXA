@@ -170,8 +170,12 @@
                     <h2><i class="fas fa-lock"></i> Connexion Administrateur</h2>
                     <form id="admin-login-form">
                         <div class="form-group">
+                            <label for="admin-username">Identifiant</label>
+                            <input type="text" id="admin-username" name="username" value="admin" autocomplete="username" required>
+                        </div>
+                        <div class="form-group">
                             <label for="admin-password">Mot de passe</label>
-                            <input type="password" id="admin-password" name="password" required placeholder="Entrez le mot de passe">
+                            <input type="password" id="admin-password" name="password" autocomplete="current-password" required placeholder="Entrez le mot de passe">
                         </div>
                         <button type="submit" class="cta-button">
                             <i class="fas fa-sign-in-alt"></i> Se connecter
@@ -343,29 +347,39 @@
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('admin') === 'true') {
             document.getElementById('admin-login-section').style.display = 'block';
+            fetch('/api/admin/session').then(r => r.json()).then(data => {
+                if (data.success) {
+                    isAdmin = true;
+                    document.getElementById('admin-login-section').style.display = 'none';
+                    document.getElementById('admin-section').style.display = 'block';
+                    loadAdminStats();
+                }
+            }).catch(() => {});
         }
 
         // Admin login form
         document.getElementById('admin-login-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const password = document.getElementById('admin-password').value;
+            const username = document.getElementById('admin-username').value.trim();
             const msgDiv = document.getElementById('login-message');
             
             try {
                 const response = await fetch('/api/admin/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ password })
+                    body: JSON.stringify({ username, password })
                 });
                 const data = await response.json();
                 
                 if (data.success) {
+                    document.getElementById('admin-password').value = '';
                     isAdmin = true;
                     document.getElementById('admin-login-section').style.display = 'none';
                     document.getElementById('admin-section').style.display = 'block';
                     loadAdminStats();
                 } else {
-                    msgDiv.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Mot de passe incorrect</div>';
+                    msgDiv.textContent = data.message || 'Connexion refusée.';
                 }
             } catch (error) {
                 msgDiv.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Erreur de connexion</div>';

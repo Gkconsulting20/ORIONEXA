@@ -35,5 +35,14 @@
     "status": "sent",
     "sentCount": 2,
     "sentAt": "2026-01-06T23:58:42.312Z"
+  },
+  {
+    "issue": 5,
+    "subject": "Newsletter Orionexa N°5 - Actualité Économique",
+    "createdAt": "2026-10-16T18:32:09.780Z",
+    "date": "vendredi 16 octobre 2026",
+    "filePath": "newsletter-5.html",
+    "status": "generated",
+    "sentCount": 0
   }
 ]
