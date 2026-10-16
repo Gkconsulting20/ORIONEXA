@@ -2,6 +2,9 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "orionexa",
   "main": "cloudflare/worker.mjs",
+  "build": {
+    "command": "npm run build:cloudflare"
+  },
   "compatibility_date": "2026-03-02",
   "workers_dev": true,
   "ai": {
@@ -16,7 +19,7 @@
     {
       "binding": "DB",
       "database_name": "orionexa-data",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "e620925a-139e-4998-b163-9f70107df158",
       "migrations_dir": "cloudflare/migrations"
     }
   ]
