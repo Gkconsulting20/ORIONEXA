@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Démo - Orionexa Togo</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/public/images/logo.png" alt="Orionexa Togo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/dashboard">Dashboard Démo</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Tableau de Bord Comptable</h1>
+            <p>Démonstration de notre solution digitale</p>
+        </section>
+
+        <section class="dashboard-section">
+            <div class="container-fluid">
+                <div class="dashboard-notice">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Ceci est un tableau de bord de démonstration. Les données affichées sont fictives et à titre d'exemple.</p>
+                </div>
+
+                <div class="dashboard-cards">
+                    <div class="dash-card">
+                        <div class="dash-card-icon revenue">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="dash-card-content">
+                            <p>Chiffre d'Affaires</p>
+                            <h3>125,450,000 FCFA</h3>
+                            <span class="dash-trend positive"><i class="fas fa-arrow-up"></i> +12.5%</span>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="dash-card-icon expenses">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="dash-card-content">
+                            <p>Dépenses du Mois</p>
+                            <h3>78,230,000 FCFA</h3>
+                            <span class="dash-trend negative"><i class="fas fa-arrow-down"></i> -5.2%</span>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="dash-card-icon profit">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="dash-card-content">
+                            <p>Résultat Net</p>
+                            <h3>47,220,000 FCFA</h3>
+                            <span class="dash-trend positive"><i class="fas fa-arrow-up"></i> +18.3%</span>
+                        </div>
+                    </div>
+
+                    <div class="dash-card">
+                        <div class="dash-card-icon tax">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="dash-card-content">
+                            <p>Impôts à Payer</p>
+                            <h3>11,805,000 FCFA</h3>
+                            <span class="dash-info">Échéance: 15 Fév</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-charts">
+                    <div class="chart-container">
+                        <h3>Évolution du Chiffre d'Affaires</h3>
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Répartition des Dépenses</h3>
+                        <canvas id="expensesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-tables">
+                    <div class="table-container">
+                        <h3>Dernières Factures</h3>
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>N° Facture</th>
+                                    <th>Client</th>
+                                    <th>Montant</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>FAC-2025-0012</td>
+                                    <td>Entreprise ABC</td>
+                                    <td>2,500,000 FCFA</td>
+                                    <td><span class="status-badge paid">Payée</span></td>
+                                    <td>15/01/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>FAC-2025-0011</td>
+                                    <td>Société XYZ</td>
+                                    <td>1,850,000 FCFA</td>
+                                    <td><span class="status-badge pending">En attente</span></td>
+                                    <td>12/01/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>FAC-2025-0010</td>
+                                    <td>SARL Commerce</td>
+                                    <td>3,200,000 FCFA</td>
+                                    <td><span class="status-badge paid">Payée</span></td>
+                                    <td>10/01/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>FAC-2025-0009</td>
+                                    <td>Distribution Plus</td>
+                                    <td>950,000 FCFA</td>
+                                    <td><span class="status-badge overdue">En retard</span></td>
+                                    <td>05/01/2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="table-container">
+                        <h3>Échéances Fiscales</h3>
+                        <table class="dashboard-table">
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Période</th>
+                                    <th>Montant</th>
+                                    <th>Échéance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>TVA</td>
+                                    <td>Janvier 2025</td>
+                                    <td>4,500,000 FCFA</td>
+                                    <td>15/02/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>IS (Acompte)</td>
+                                    <td>T1 2025</td>
+                                    <td>7,305,000 FCFA</td>
+                                    <td>15/03/2025</td>
+                                </tr>
+                                <tr>
+                                    <td>IRPP</td>
+                                    <td>Janvier 2025</td>
+                                    <td>850,000 FCFA</td>
+                                    <td>15/02/2025</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="dashboard-alerts">
+                    <h3>Alertes & Notifications</h3>
+                    <div class="alert-item warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>TVA à déclarer</strong>
+                            <p>La déclaration TVA de janvier doit être soumise avant le 15 février</p>
+                        </div>
+                    </div>
+                    <div class="alert-item info">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Facture en retard</strong>
+                            <p>La facture FAC-2025-0009 (950,000 FCFA) est en retard de paiement</p>
+                        </div>
+                    </div>
+                    <div class="alert-item success">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Objectif atteint</strong>
+                            <p>Le chiffre d'affaires du mois a dépassé l'objectif de 12%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Impressionné par notre solution ?</h2>
+                <p>Accédez à votre propre tableau de bord avec vos données réelles</p>
+                <a href="/devis" class="cta-button">Demander une Démo Personnalisée</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Orionexa Togo. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="/public/js/script.js"></script>
+    <script src="/public/js/dashboard.js"></script>
+</body>
+</html>

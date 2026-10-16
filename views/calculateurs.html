@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateurs - Orionexa Togo</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/public/images/logo.png" alt="Orionexa Togo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/calculateurs">Calculateurs</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Calculateurs Fiscaux & Comptables</h1>
+            <p>Outils gratuits pour gérer votre entreprise</p>
+        </section>
+
+        <section class="calculateurs-section">
+            <div class="container">
+                <div class="calc-tabs">
+                    <button class="calc-tab active" data-calc="impots">Calculateur d'Impôts</button>
+                    <button class="calc-tab" data-calc="economies">Simulateur d'Économies</button>
+                    <button class="calc-tab" data-calc="tva">Calculateur TVA</button>
+                    <button class="calc-tab" data-calc="salaire">Calculateur Salaire Net</button>
+                </div>
+
+                <div id="impots" class="calc-content active">
+                    <h2>Calculateur d'Impôt sur les Sociétés (IS)</h2>
+                    <p>Estimez votre impôt sur les sociétés pour 2025</p>
+                    
+                    <div class="calculator-box">
+                        <div class="calc-inputs">
+                            <div class="form-group">
+                                <label for="chiffreAffaires">Chiffre d'affaires annuel (FCFA)</label>
+                                <input type="number" id="chiffreAffaires" placeholder="Ex: 50000000">
+                            </div>
+                            <div class="form-group">
+                                <label for="charges">Charges déductibles (FCFA)</label>
+                                <input type="number" id="charges" placeholder="Ex: 30000000">
+                            </div>
+                            <div class="form-group">
+                                <label for="typeSociete">Type de société</label>
+                                <select id="typeSociete">
+                                    <option value="pme">PME (taux réduit 25%)</option>
+                                    <option value="grande">Grande entreprise (27%)</option>
+                                </select>
+                            </div>
+                            <button onclick="calculerIS()" class="cta-button">Calculer</button>
+                        </div>
+                        <div id="resultatIS" class="calc-result">
+                            <div class="result-card">
+                                <h3>Résultat Fiscal</h3>
+                                <div class="result-item">
+                                    <span>Résultat avant impôt :</span>
+                                    <strong id="resultatAvantImpot">-</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Taux d'imposition :</span>
+                                    <strong id="tauxIS">-</strong>
+                                </div>
+                                <div class="result-item highlight">
+                                    <span>Impôt sur les sociétés :</span>
+                                    <strong id="montantIS">-</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Résultat net après impôt :</span>
+                                    <strong id="resultatNet">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="economies" class="calc-content">
+                    <h2>Simulateur d'Économies avec la Digitalisation</h2>
+                    <p>Calculez combien vous pouvez économiser en digitalisant votre comptabilité</p>
+                    
+                    <div class="calculator-box">
+                        <div class="calc-inputs">
+                            <div class="form-group">
+                                <label for="nbEmployes">Nombre d'employés comptables</label>
+                                <input type="number" id="nbEmployes" placeholder="Ex: 2" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="tempsCompta">Temps comptable/mois (heures)</label>
+                                <input type="number" id="tempsCompta" placeholder="Ex: 80" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="tauxHoraire">Coût horaire moyen (FCFA)</label>
+                                <input type="number" id="tauxHoraire" placeholder="Ex: 2000" min="100">
+                            </div>
+                            <div class="form-group">
+                                <label for="erreurs">Coût des erreurs/mois (FCFA)</label>
+                                <input type="number" id="erreurs" placeholder="Ex: 50000" min="0">
+                            </div>
+                            <button onclick="calculerEconomies()" class="cta-button">Calculer les Économies</button>
+                        </div>
+                        <div id="resultatEconomies" class="calc-result">
+                            <div class="result-card">
+                                <h3>Économies Estimées</h3>
+                                <div class="result-item">
+                                    <span>Coût actuel mensuel :</span>
+                                    <strong id="coutActuel">-</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Gain de temps (70%) :</span>
+                                    <strong id="gainTemps">-</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Réduction erreurs (90%) :</span>
+                                    <strong id="reductionErreurs">-</strong>
+                                </div>
+                                <div class="result-item highlight">
+                                    <span>Économies mensuelles :</span>
+                                    <strong id="economiesMensuel">-</strong>
+                                </div>
+                                <div class="result-item highlight">
+                                    <span>Économies annuelles :</span>
+                                    <strong id="economiesAnnuel">-</strong>
+                                </div>
+                                <div class="result-info">
+                                    <p>💡 En digitalisant votre comptabilité, vous pourriez économiser jusqu'à <span id="pourcentageEconomie">0</span>% de vos coûts actuels !</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tva" class="calc-content">
+                    <h2>Calculateur de TVA</h2>
+                    <p>Calculez rapidement la TVA sur vos transactions</p>
+                    
+                    <div class="calculator-box">
+                        <div class="calc-inputs">
+                            <div class="form-group">
+                                <label>Type de calcul</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="tvaType" value="ht" checked> Ajouter la TVA (HT → TTC)</label>
+                                    <label><input type="radio" name="tvaType" value="ttc"> Extraire la TVA (TTC → HT)</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="montantTVA">Montant (FCFA)</label>
+                                <input type="number" id="montantTVA" placeholder="Ex: 100000">
+                            </div>
+                            <div class="form-group">
+                                <label for="tauxTVA">Taux de TVA</label>
+                                <select id="tauxTVA">
+                                    <option value="18">18% (Taux normal)</option>
+                                    <option value="0">0% (Exonéré)</option>
+                                </select>
+                            </div>
+                            <button onclick="calculerTVA()" class="cta-button">Calculer</button>
+                        </div>
+                        <div id="resultatTVA" class="calc-result">
+                            <div class="result-card">
+                                <h3>Calcul TVA</h3>
+                                <div class="result-item">
+                                    <span>Montant HT :</span>
+                                    <strong id="montantHT">-</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Montant TVA :</span>
+                                    <strong id="montantTVAResult">-</strong>
+                                </div>
+                                <div class="result-item highlight">
+                                    <span>Montant TTC :</span>
+                                    <strong id="montantTTC">-</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="salaire" class="calc-content">
+                    <h2>Calculateur Salaire Net</h2>
+                    <p>Convertissez salaire brut en net (estimation)</p>
+                    
+                    <div class="calculator-box">
+                        <div class="calc-inputs">
+                            <div class="form-group">
+                                <label for="salaireBrut">Salaire brut mensuel (FCFA)</label>
+                                <input type="number" id="salaireBrut" placeholder="Ex: 500000">
+                            </div>
+                            <div class="form-group">
+                                <label>Informations</label>
+                                <p class="info-text">Les cotisations sociales au Togo représentent environ 16.5% du salaire brut (CNSS + autres charges)</p>
+                            </div>
+                            <button onclick="calculerSalaireNet()" class="cta-button">Calculer</button>
+                        </div>
+                        <div id="resultatSalaire" class="calc-result">
+                            <div class="result-card">
+                                <h3>Calcul Salaire</h3>
+                                <div class="result-item">
+                                    <span>Salaire brut :</span>
+                                    <strong id="brut">-</strong>
+                                </div>
+                                <div class="result-item">
+                                    <span>Cotisations (≈16.5%) :</span>
+                                    <strong id="cotisations">-</strong>
+                                </div>
+                                <div class="result-item highlight">
+                                    <span>Salaire net estimé :</span>
+                                    <strong id="net">-</strong>
+                                </div>
+                                <div class="result-info">
+                                    <p>⚠️ Ceci est une estimation. Les charges exactes dépendent de votre situation spécifique.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-disclaimer">
+                    <h3><i class="fas fa-info-circle"></i> Information Importante</h3>
+                    <p>Ces calculateurs fournissent des estimations basées sur la législation togolaise en vigueur. Pour un calcul précis adapté à votre situation spécifique, <a href="/contact">consultez nos experts</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Besoin d'aide pour vos calculs fiscaux ?</h2>
+                <p>Nos experts sont à votre disposition pour une analyse personnalisée</p>
+                <a href="/devis" class="cta-button">Demander un Devis Gratuit</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Orionexa Togo. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="/public/js/script.js"></script>
+    <script src="/public/js/calculateurs.js"></script>
+</body>
+</html>

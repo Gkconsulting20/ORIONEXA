@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - Orionexa Togo</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/public/images/logo.png" alt="Orionexa Togo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/chatbot">Chatbot</a></li>
+                <li><a href="/abonnement">Abonnement</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Assistant Virtuel</h1>
+            <p>Posez-nous vos questions</p>
+        </section>
+
+        <section class="chatbot-section">
+            <div class="container">
+                <div class="chatbot-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="bot-message">
+                            <p>Bonjour ! Je suis l'assistant virtuel de Orionexa. Comment puis-je vous aider aujourd'hui ?</p>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chatInput" placeholder="Tapez votre message...">
+                        <button id="chatSend" class="cta-button">Envoyer</button>
+                    </div>
+                </div>
+                <div class="quick-questions">
+                    <h3>Questions fréquentes :</h3>
+                    <button class="question-btn" data-question="Quels sont vos services ?">Quels sont vos services ?</button>
+                    <button class="question-btn" data-question="Parlez-moi de la comptabilité digitalisée">Comptabilité digitalisée</button>
+                    <button class="question-btn" data-question="Comment gérez-vous la fiscalité ?">Services fiscaux</button>
+                    <button class="question-btn" data-question="Optimisation des processus">Optimisation des processus</button>
+                    <button class="question-btn" data-question="Quels sont vos tarifs ?">Tarifs</button>
+                    <button class="question-btn" data-question="Comment vous contacter ?">Contact</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Orionexa Togo. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="/public/js/script.js"></script>
+</body>
+</html>

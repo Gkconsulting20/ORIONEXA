@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Newsletter Orionexa - Recevez chaque semaine l'actualité économique du Togo et de la CEDEAO">
+    <title>Newsletter - Orionexa Togo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/public/images/logo.png" alt="Orionexa Togo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/applications">Applications</a></li>
+                <li><a href="/devis">Devis</a></li>
+                <li><a href="/newsletter">Newsletter</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/abonnement" class="btn-abonnement">Abonnements</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Newsletter Orionexa</h1>
+            <p>L'actualité économique du Togo et de la CEDEAO, chaque semaine dans votre boîte mail</p>
+        </section>
+
+        <section class="newsletter-section">
+            <div class="container">
+                <div class="newsletter-hero">
+                    <div class="newsletter-hero-content">
+                        <div class="newsletter-icon">
+                            <i class="fas fa-envelope-open-text"></i>
+                        </div>
+                        <h2>Restez informé de l'actualité économique</h2>
+                        <p>Chaque semaine, recevez gratuitement notre récapitulatif de l'actualité économique au Togo et dans la CEDEAO. Analyses, tendances du marché, nouvelles réglementations fiscales et opportunités d'affaires.</p>
+                    </div>
+                </div>
+
+                <div class="newsletter-content-grid">
+                    <div class="newsletter-benefits">
+                        <h3><i class="fas fa-check-circle"></i> Ce que vous recevrez</h3>
+                        <ul class="benefits-list">
+                            <li>
+                                <i class="fas fa-chart-line"></i>
+                                <div>
+                                    <strong>Actualités économiques</strong>
+                                    <p>Les dernières nouvelles économiques du Togo et de la sous-région</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-gavel"></i>
+                                <div>
+                                    <strong>Réglementations fiscales</strong>
+                                    <p>Mises à jour sur les lois fiscales et obligations déclaratives</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-globe-africa"></i>
+                                <div>
+                                    <strong>Marché CEDEAO</strong>
+                                    <p>Opportunités d'affaires et tendances dans la zone CEDEAO</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-lightbulb"></i>
+                                <div>
+                                    <strong>Conseils pratiques</strong>
+                                    <p>Astuces comptables et fiscales pour optimiser votre gestion</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>
+                                    <strong>Échéances importantes</strong>
+                                    <p>Rappels des dates clés fiscales et administratives</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="newsletter-form-container">
+                        <div class="newsletter-form-card">
+                            <h3><i class="fas fa-paper-plane"></i> Inscrivez-vous gratuitement</h3>
+                            <form id="newsletter-form" class="newsletter-form">
+                                <div class="form-group">
+                                    <label for="prenom">Prénom *</label>
+                                    <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nom">Nom *</label>
+                                    <input type="text" id="nom" name="nom" required placeholder="Votre nom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="entreprise">Entreprise (optionnel)</label>
+                                    <input type="text" id="entreprise" name="entreprise" placeholder="Nom de votre entreprise">
+                                </div>
+                                <div class="form-group">
+                                    <label for="secteur">Secteur d'activité</label>
+                                    <select id="secteur" name="secteur">
+                                        <option value="">-- Sélectionnez --</option>
+                                        <option value="commerce">Commerce</option>
+                                        <option value="services">Services</option>
+                                        <option value="industrie">Industrie</option>
+                                        <option value="agriculture">Agriculture</option>
+                                        <option value="btp">BTP</option>
+                                        <option value="transport">Transport & Logistique</option>
+                                        <option value="tech">Technologies</option>
+                                        <option value="sante">Santé</option>
+                                        <option value="education">Éducation</option>
+                                        <option value="autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="form-group checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="consent" required>
+                                        <span>J'accepte de recevoir la newsletter hebdomadaire d'Orionexa *</span>
+                                    </label>
+                                </div>
+                                <button type="submit" class="cta-button submit-btn">
+                                    <i class="fas fa-envelope"></i> S'inscrire à la newsletter
+                                </button>
+                            </form>
+                            <div id="form-message" class="form-message"></div>
+                            <p class="form-note"><i class="fas fa-lock"></i> Vos données sont protégées. Désinscription possible à tout moment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="newsletter-frequency">
+                    <div class="frequency-card">
+                        <i class="fas fa-calendar-week"></i>
+                        <h4>Envoi hebdomadaire</h4>
+                        <p>Chaque vendredi matin</p>
+                    </div>
+                    <div class="frequency-card">
+                        <i class="fas fa-users"></i>
+                        <h4>+500 abonnés</h4>
+                        <p>Entrepreneurs & Dirigeants</p>
+                    </div>
+                    <div class="frequency-card">
+                        <i class="fas fa-star"></i>
+                        <h4>100% Gratuit</h4>
+                        <p>Sans engagement</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-login-section" id="admin-login-section" style="display: none;">
+            <div class="container">
+                <div class="admin-login-panel">
+                    <h2><i class="fas fa-lock"></i> Connexion Administrateur</h2>
+                    <form id="admin-login-form">
+                        <div class="form-group">
+                            <label for="admin-password">Mot de passe</label>
+                            <input type="password" id="admin-password" name="password" required placeholder="Entrez le mot de passe">
+                        </div>
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-sign-in-alt"></i> Se connecter
+                        </button>
+                    </form>
+                    <div id="login-message" class="form-message"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="admin-section" id="admin-section" style="display: none;">
+            <div class="container">
+                <div class="admin-panel">
+                    <h2><i class="fas fa-cogs"></i> Administration Newsletter</h2>
+                    <div class="admin-stats">
+                        <div class="stat-card">
+                            <i class="fas fa-users"></i>
+                            <span id="subscriber-count">0</span>
+                            <p>Abonnés</p>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-newspaper"></i>
+                            <span id="newsletter-count">0</span>
+                            <p>Newsletters</p>
+                        </div>
+                    </div>
+                    <div class="admin-actions">
+                        <button id="btn-generate" class="admin-btn generate-btn">
+                            <i class="fas fa-magic"></i> Générer une nouvelle newsletter
+                        </button>
+                        <button id="btn-send" class="admin-btn send-btn">
+                            <i class="fas fa-paper-plane"></i> Envoyer aux abonnés
+                        </button>
+                        <button id="btn-test-email" class="admin-btn test-btn">
+                            <i class="fas fa-vial"></i> Tester connexion email
+                        </button>
+                    </div>
+                    <div id="admin-message" class="admin-message"></div>
+                    <button id="btn-logout" class="admin-btn logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Déconnexion
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="archives-section">
+            <div class="container">
+                <h2><i class="fas fa-archive"></i> Archives des Newsletters</h2>
+                <p class="archives-intro">Retrouvez toutes nos éditions précédentes de la Newsletter Orionexa.</p>
+                
+                <div id="archives-list" class="archives-grid">
+                    <div class="loading-archives">
+                        <i class="fas fa-spinner fa-spin"></i> Chargement des archives...
+                    </div>
+                </div>
+                
+                <div id="no-archives" class="no-archives" style="display: none;">
+                    <i class="fas fa-newspaper"></i>
+                    <p>Aucune newsletter publiée pour le moment.</p>
+                    <p>Inscrivez-vous pour recevoir la première édition !</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Orionexa</h3>
+                    <p>La gestion moderne, sans limites.</p>
+                    <p>Votre partenaire en comptabilité, fiscalité et digitalisation au Togo.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens Rapides</h3>
+                    <ul>
+                        <li><a href="/">Accueil</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/applications">Applications</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Lomé, Togo</p>
+                    <p><i class="fas fa-phone"></i> +228 71 06 27 30</p>
+                    <p><i class="fas fa-envelope"></i> contact@orionexa.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Orionexa. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('newsletter-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                prenom: document.getElementById('prenom').value,
+                nom: document.getElementById('nom').value,
+                email: document.getElementById('email').value,
+                entreprise: document.getElementById('entreprise').value,
+                secteur: document.getElementById('secteur').value,
+                date: new Date().toISOString()
+            };
+            
+            try {
+                const response = await fetch('/api/newsletter', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                const messageDiv = document.getElementById('form-message');
+                
+                if (result.success) {
+                    messageDiv.innerHTML = '<div class="success-message"><i class="fas fa-check-circle"></i> ' + result.message + '</div>';
+                    document.getElementById('newsletter-form').reset();
+                } else {
+                    messageDiv.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> ' + result.message + '</div>';
+                }
+            } catch (error) {
+                document.getElementById('form-message').innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Une erreur est survenue. Veuillez réessayer.</div>';
+            }
+        });
+
+        async function loadArchives() {
+            try {
+                const response = await fetch('/api/newsletters');
+                const data = await response.json();
+                
+                const archivesList = document.getElementById('archives-list');
+                const noArchives = document.getElementById('no-archives');
+                
+                if (data.newsletters && data.newsletters.length > 0) {
+                    archivesList.innerHTML = data.newsletters.map(nl => `
+                        <div class="archive-card">
+                            <div class="archive-header">
+                                <span class="archive-issue">N°${nl.issue}</span>
+                                <span class="archive-date">${nl.date}</span>
+                            </div>
+                            <h3>${nl.subject}</h3>
+                            <a href="/api/newsletters/${nl.issue}" target="_blank" class="archive-link">
+                                <i class="fas fa-eye"></i> Lire cette édition
+                            </a>
+                        </div>
+                    `).join('');
+                } else {
+                    archivesList.style.display = 'none';
+                    noArchives.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading archives:', error);
+                document.getElementById('archives-list').innerHTML = '<p>Erreur lors du chargement des archives.</p>';
+            }
+        }
+
+        loadArchives();
+
+        // Admin functionality
+        let isAdmin = false;
+
+        // Check for admin access via URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('admin') === 'true') {
+            document.getElementById('admin-login-section').style.display = 'block';
+        }
+
+        // Admin login form
+        document.getElementById('admin-login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const password = document.getElementById('admin-password').value;
+            const msgDiv = document.getElementById('login-message');
+            
+            try {
+                const response = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ password })
+                });
+                const data = await response.json();
+                
+                if (data.success) {
+                    isAdmin = true;
+                    document.getElementById('admin-login-section').style.display = 'none';
+                    document.getElementById('admin-section').style.display = 'block';
+                    loadAdminStats();
+                } else {
+                    msgDiv.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Mot de passe incorrect</div>';
+                }
+            } catch (error) {
+                msgDiv.innerHTML = '<div class="error-message"><i class="fas fa-exclamation-circle"></i> Erreur de connexion</div>';
+            }
+        });
+
+        async function loadAdminStats() {
+            try {
+                // Load subscriber count
+                const subsResponse = await fetch('/api/newsletter-subscribers/count');
+                const subsData = await subsResponse.json();
+                document.getElementById('subscriber-count').textContent = subsData.count || 0;
+
+                // Load newsletter count
+                const nlResponse = await fetch('/api/newsletters');
+                const nlData = await nlResponse.json();
+                document.getElementById('newsletter-count').textContent = nlData.newsletters ? nlData.newsletters.length : 0;
+            } catch (error) {
+                console.error('Error loading admin stats:', error);
+            }
+        }
+
+        document.getElementById('btn-generate').addEventListener('click', async function() {
+            const btn = this;
+            const msgDiv = document.getElementById('admin-message');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Génération en cours...';
+            msgDiv.innerHTML = '';
+
+            try {
+                const response = await fetch('/api/newsletters/generate', { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.success) {
+                    msgDiv.innerHTML = '<div class="success-msg"><i class="fas fa-check-circle"></i> Newsletter générée avec succès !</div>';
+                    loadAdminStats();
+                    loadArchives();
+                } else {
+                    msgDiv.innerHTML = '<div class="error-msg"><i class="fas fa-exclamation-circle"></i> ' + (data.message || 'Erreur lors de la génération') + '</div>';
+                }
+            } catch (error) {
+                msgDiv.innerHTML = '<div class="error-msg"><i class="fas fa-exclamation-circle"></i> Erreur de connexion</div>';
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-magic"></i> Générer une nouvelle newsletter';
+        });
+
+        document.getElementById('btn-send').addEventListener('click', async function() {
+            const btn = this;
+            const msgDiv = document.getElementById('admin-message');
+            
+            if (!confirm('Voulez-vous vraiment envoyer la newsletter à tous les abonnés ?')) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            msgDiv.innerHTML = '';
+
+            try {
+                const response = await fetch('/api/newsletters/send', { method: 'POST' });
+                const data = await response.json();
+                
+                if (data.success) {
+                    msgDiv.innerHTML = '<div class="success-msg"><i class="fas fa-check-circle"></i> Newsletter envoyée à ' + (data.sentCount || 0) + ' abonné(s) !</div>';
+                } else {
+                    msgDiv.innerHTML = '<div class="error-msg"><i class="fas fa-exclamation-circle"></i> ' + (data.message || 'Erreur lors de l\'envoi') + '</div>';
+                }
+            } catch (error) {
+                msgDiv.innerHTML = '<div class="error-msg"><i class="fas fa-exclamation-circle"></i> Erreur de connexion</div>';
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer aux abonnés';
+        });
+
+        document.getElementById('btn-test-email').addEventListener('click', async function() {
+            const btn = this;
+            const msgDiv = document.getElementById('admin-message');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Test en cours...';
+
+            try {
+                const response = await fetch('/api/newsletters/test-email');
+                const data = await response.json();
+                
+                if (data.success) {
+                    msgDiv.innerHTML = '<div class="success-msg"><i class="fas fa-check-circle"></i> Connexion email OK !</div>';
+                } else {
+                    msgDiv.innerHTML = '<div class="error-msg"><i class="fas fa-exclamation-circle"></i> ' + (data.message || 'Erreur de connexion email') + '</div>';
+                }
+            } catch (error) {
+                msgDiv.innerHTML = '<div class="error-msg"><i class="fas fa-exclamation-circle"></i> Erreur de test</div>';
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-vial"></i> Tester connexion email';
+        });
+
+        document.getElementById('btn-logout').addEventListener('click', async function() {
+            try {
+                await fetch('/api/admin/logout', { method: 'POST' });
+            } catch (error) {
+                console.error('Admin logout request failed:', error);
+            }
+            window.location.href = '/newsletter';
+        });
+    </script>
+</body>
+</html>

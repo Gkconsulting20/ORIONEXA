@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de Devis - Orionexa Togo</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/public/images/logo.png" alt="Orionexa Togo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/devis">Devis</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Demande de Devis Gratuit</h1>
+            <p>Obtenez une proposition personnalisée en 24h</p>
+        </section>
+
+        <section class="devis-section">
+            <div class="container">
+                <div class="devis-info">
+                    <h2>Pourquoi demander un devis ?</h2>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Proposition personnalisée adaptée à vos besoins</li>
+                        <li><i class="fas fa-check-circle"></i> Tarification transparente et détaillée</li>
+                        <li><i class="fas fa-check-circle"></i> Analyse gratuite de votre situation</li>
+                        <li><i class="fas fa-check-circle"></i> Réponse sous 24 heures</li>
+                        <li><i class="fas fa-check-circle"></i> Sans engagement</li>
+                    </ul>
+                </div>
+
+                <div class="devis-form-container">
+                    <form id="devisForm" class="devis-form">
+                        <h2>Vos Informations</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nom">Nom complet *</label>
+                                <input type="text" id="nom" name="nom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="entreprise">Entreprise *</label>
+                                <input type="text" id="entreprise" name="entreprise" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telephone">Téléphone *</label>
+                                <input type="tel" id="telephone" name="telephone" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="secteur">Secteur d'activité *</label>
+                            <select id="secteur" name="secteur" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="commerce">Commerce</option>
+                                <option value="services">Services</option>
+                                <option value="industrie">Industrie</option>
+                                <option value="construction">Construction</option>
+                                <option value="agriculture">Agriculture</option>
+                                <option value="transport">Transport & Logistique</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="taille">Taille de l'entreprise *</label>
+                            <select id="taille" name="taille" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="tpe">TPE (1-5 employés)</option>
+                                <option value="pme">PME (6-50 employés)</option>
+                                <option value="moyenne">Moyenne (51-200 employés)</option>
+                                <option value="grande">Grande entreprise (200+ employés)</option>
+                            </select>
+                        </div>
+
+                        <h3>Services Souhaités</h3>
+                        
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="services[]" value="comptabilite">
+                                <span>Comptabilité Digitalisée</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="services[]" value="fiscalite">
+                                <span>Fiscalité</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="services[]" value="optimisation">
+                                <span>Optimisation des Processus</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="services[]" value="audit">
+                                <span>Audit & Analyse</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="urgence">Délai souhaité *</label>
+                            <select id="urgence" name="urgence" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="immediat">Immédiat (dans la semaine)</option>
+                                <option value="1mois">Dans le mois</option>
+                                <option value="3mois">Dans les 3 mois</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="details">Détails de votre besoin</label>
+                            <textarea id="details" name="details" rows="4" placeholder="Décrivez-nous vos besoins spécifiques..."></textarea>
+                        </div>
+
+                        <button type="submit" class="cta-button">Recevoir mon Devis Gratuit</button>
+                    </form>
+                    <div id="devisMessage" class="form-message"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Orionexa Togo. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="/public/js/script.js"></script>
+</body>
+</html>

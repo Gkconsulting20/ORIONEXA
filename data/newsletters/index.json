@@ -1,0 +1,39 @@
+[
+  {
+    "issue": 1,
+    "subject": "Newsletter Orionexa N°1 - Actualité Économique",
+    "createdAt": "2025-12-19T00:13:10.628Z",
+    "date": "vendredi 19 décembre 2025",
+    "filePath": "newsletter-1.html",
+    "status": "generated",
+    "sentCount": 0
+  },
+  {
+    "issue": 2,
+    "subject": "Newsletter Orionexa N°2 - Actualité Économique",
+    "createdAt": "2025-12-19T00:29:41.470Z",
+    "date": "vendredi 19 décembre 2025",
+    "filePath": "newsletter-2.html",
+    "status": "generated",
+    "sentCount": 0
+  },
+  {
+    "issue": 3,
+    "subject": "Newsletter Orionexa N°3 - Actualité Économique",
+    "createdAt": "2025-12-19T00:30:18.051Z",
+    "date": "vendredi 19 décembre 2025",
+    "filePath": "newsletter-3.html",
+    "status": "generated",
+    "sentCount": 0
+  },
+  {
+    "issue": 4,
+    "subject": "Newsletter Orionexa N°4 - Actualité Économique",
+    "createdAt": "2026-01-03T01:53:28.828Z",
+    "date": "samedi 3 janvier 2026",
+    "filePath": "newsletter-4.html",
+    "status": "sent",
+    "sentCount": 2,
+    "sentAt": "2026-01-06T23:58:42.312Z"
+  }
+]

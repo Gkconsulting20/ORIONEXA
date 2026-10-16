@@ -1,0 +1,35 @@
+{
+  "name": "orionexa-togo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Orionexa Togo - Professional Consulting Services",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "build:cloudflare": "node scripts/build-cloudflare-assets.mjs",
+    "dev:cloudflare": "npm run build:cloudflare && wrangler dev --config wrangler.jsonc --local",
+    "deploy": "npm run deploy:cloudflare",
+    "deploy:cloudflare": "npm run build:cloudflare && wrangler deploy --config wrangler.jsonc",
+    "migrate:cloudflare:data": "node scripts/migrate-cloudflare-data.mjs",
+    "dev:pages": "wrangler pages dev ./public --compatibility-date=2024-12-01 --config wrangler.toml",
+    "deploy:pages": "wrangler pages deploy ./public --config wrangler.toml"
+  },
+  "keywords": [
+    "consulting",
+    "togo",
+    "business"
+  ],
+  "author": "Orionexa",
+  "license": "ISC",
+  "dependencies": {
+    "@getbrevo/brevo": "^3.0.1",
+    "express": "^4.21.2",
+    "openai": "^6.4.0",
+    "pg": "^8.16.3",
+    "proxy-addr": "^2.0.8"
+  },
+  "devDependencies": {
+    "wrangler": "^4.68.0"
+  }
+}

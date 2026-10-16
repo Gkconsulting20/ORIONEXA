@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orionexa - Prospectus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .prospectus {
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #3498db;
+            margin-bottom: 25px;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-section img {
+            height: 60px;
+        }
+        
+        .logo-text h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .contact-header {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .contact-header p {
+            margin: 3px 0;
+        }
+        
+        .contact-header i {
+            color: #3498db;
+            margin-right: 5px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #3498db;
+            display: inline-block;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .service-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .service-card h3 {
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .service-card h3 i {
+            color: #3498db;
+            font-size: 1.1rem;
+        }
+        
+        .service-card p {
+            font-size: 0.85rem;
+            color: #555;
+        }
+        
+        .apps-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .app-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .app-card i {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .app-card h4 {
+            font-size: 0.95rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .app-card p {
+            font-size: 0.75rem;
+            color: #777;
+        }
+        
+        .badge {
+            background: #27ae60;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 5px;
+        }
+        
+        .advantages {
+            margin-bottom: 25px;
+        }
+        
+        .advantages-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .advantage-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: #e8f4fd;
+            border-radius: 8px;
+        }
+        
+        .advantage-item i {
+            color: #27ae60;
+            font-size: 1.1rem;
+        }
+        
+        .advantage-item span {
+            font-size: 0.9rem;
+            color: #2c3e50;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #e74c3c 0%, #d35400 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .cta-section p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .cta-contact {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .cta-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        
+        .footer a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .prospectus {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="prospectus">
+        <div class="header">
+            <div class="logo-section">
+                <img src="/public/images/logo.png" alt="Orionexa">
+                <div class="logo-text">
+                    <h1>ORIONEXA</h1>
+                    <p>La gestion moderne, sans limites.</p>
+                </div>
+            </div>
+            <div class="contact-header">
+                <p><i class="fas fa-globe"></i> orionexa.com</p>
+                <p><i class="fas fa-envelope"></i> contact@orionexa.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Lomé, Togo</p>
+            </div>
+        </div>
+        
+        <div class="hero">
+            <h2>Votre Partenaire en Comptabilité & Digitalisation</h2>
+            <p>Cabinet spécialisé en comptabilité en ligne, fiscalité et transformation digitale au Togo</p>
+        </div>
+        
+        <h3 class="section-title"><i class="fas fa-briefcase"></i> Nos Services</h3>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3><i class="fas fa-calculator"></i> Comptabilité & Fiscalité en Ligne</h3>
+                <p>Tenue comptable, déclarations fiscales, tableaux de bord en temps réel, optimisation fiscale</p>
+            </div>
+            <div class="service-card">
+                <h3><i class="fas fa-cogs"></i> Amélioration de Processus</h3>
+                <p>Analyse des flux, optimisation des coûts, mise en place de KPIs, réduction des délais</p>
+            </div>
+            <div class="service-card">
+                <h3><i class="fas fa-laptop-code"></i> Digitalisation</h3>
+                <p>Migration cloud, dématérialisation, automatisation, transformation numérique</p>
+            </div>
+            <div class="service-card">
+                <h3><i class="fas fa-graduation-cap"></i> Formation Professionnelle</h3>
+                <p>Formations en comptabilité, fiscalité, outils digitaux et gestion financière</p>
+            </div>
+        </div>
+        
+        <div class="apps-section">
+            <h3 class="section-title"><i class="fas fa-laptop"></i> Nos Solutions Logicielles</h3>
+            <div class="apps-grid">
+                <div class="app-card">
+                    <i class="fas fa-book"></i>
+                    <h4>ComptaOrion</h4>
+                    <p>Logiciel comptable complet adapté aux PME togolaises</p>
+                </div>
+                <div class="app-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h4>OriRisk Data Collector</h4>
+                    <p>Collecte et analyse des risques avec IA</p>
+                </div>
+                <div class="app-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>QuickBooks Online <span class="badge">Certifié</span></h4>
+                    <p>Conseil et déploiement QuickBooks</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="advantages">
+            <h3 class="section-title"><i class="fas fa-star"></i> Pourquoi Choisir Orionexa ?</h3>
+            <div class="advantages-list">
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Expertise locale et internationale</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Solutions 100% en ligne</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Tarifs adaptés aux PME</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Support réactif et personnalisé</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Conformité fiscale garantie</span>
+                </div>
+                <div class="advantage-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Formation incluse</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h3>Prêt à moderniser votre gestion ?</h3>
+            <p>Contactez-nous pour un devis gratuit et personnalisé</p>
+            <div class="cta-contact">
+                <div class="cta-contact-item">
+                    <i class="fas fa-phone"></i> +228 71 06 27 30
+                </div>
+                <div class="cta-contact-item">
+                    <i class="fab fa-whatsapp"></i> +228 71 06 27 30
+                </div>
+                <div class="cta-contact-item">
+                    <i class="fas fa-envelope"></i> contact@orionexa.com
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Visitez notre site web : <a href="https://orionexa.com">orionexa.com</a></p>
+            <p>Orionexa - Cabinet de Comptabilité et Conseil en Digitalisation | Lomé, Togo</p>
+        </div>
+    </div>
+</body>
+</html>

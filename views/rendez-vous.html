@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prendre Rendez-vous - Orionexa Togo</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="/public/images/favicon.png">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">
+                    <img src="/public/images/logo.png" alt="Orionexa Togo" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Prendre Rendez-vous</h1>
+            <p>Réservez votre consultation gratuite</p>
+        </section>
+
+        <section class="rdv-section">
+            <div class="container">
+                <div class="rdv-info">
+                    <h2>Consultation Gratuite</h2>
+                    <p>Lors de ce rendez-vous, nous allons :</p>
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check-circle"></i> Analyser vos besoins comptables et fiscaux</li>
+                        <li><i class="fas fa-check-circle"></i> Identifier les opportunités d'optimisation</li>
+                        <li><i class="fas fa-check-circle"></i> Vous proposer les solutions adaptées</li>
+                        <li><i class="fas fa-check-circle"></i> Répondre à toutes vos questions</li>
+                    </ul>
+                    <div class="rdv-options">
+                        <h3>Modes de consultation</h3>
+                        <div class="mode-option">
+                            <i class="fas fa-building"></i>
+                            <div>
+                                <strong>En présentiel</strong>
+                                <p>À nos bureaux à Lomé</p>
+                            </div>
+                        </div>
+                        <div class="mode-option">
+                            <i class="fas fa-video"></i>
+                            <div>
+                                <strong>Visioconférence</strong>
+                                <p>Via Google Meet ou Zoom</p>
+                            </div>
+                        </div>
+                        <div class="mode-option">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Par téléphone</strong>
+                                <p>Appel téléphonique</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rdv-form-container">
+                    <form id="rdvForm" class="rdv-form">
+                        <h2>Réservez votre créneau</h2>
+                        
+                        <div class="form-group">
+                            <label for="rdvNom">Nom complet *</label>
+                            <input type="text" id="rdvNom" name="nom" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvEmail">Email *</label>
+                            <input type="email" id="rdvEmail" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvTelephone">Téléphone *</label>
+                            <input type="tel" id="rdvTelephone" name="telephone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvEntreprise">Entreprise</label>
+                            <input type="text" id="rdvEntreprise" name="entreprise">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvMode">Mode de consultation *</label>
+                            <select id="rdvMode" name="mode" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="presentiel">En présentiel (Lomé)</option>
+                                <option value="visio">Visioconférence</option>
+                                <option value="telephone">Par téléphone</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvDate">Date souhaitée *</label>
+                            <input type="date" id="rdvDate" name="date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvHeure">Heure souhaitée *</label>
+                            <select id="rdvHeure" name="heure" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvSujet">Sujet de la consultation *</label>
+                            <select id="rdvSujet" name="sujet" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="comptabilite">Comptabilité Digitalisée</option>
+                                <option value="fiscalite">Questions Fiscales</option>
+                                <option value="optimisation">Optimisation des Processus</option>
+                                <option value="audit">Audit & Analyse</option>
+                                <option value="abonnement">Information sur les abonnements</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rdvMessage">Message (optionnel)</label>
+                            <textarea id="rdvMessage" name="message" rows="3" placeholder="Précisez vos questions ou besoins..."></textarea>
+                        </div>
+
+                        <button type="submit" class="cta-button">Réserver mon Rendez-vous</button>
+                    </form>
+                    <div id="rdvFormMessage" class="form-message"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Orionexa Togo. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="/public/js/script.js"></script>
+</body>
+</html>
