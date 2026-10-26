@@ -18,3 +18,5 @@ jobs:
           node-version: "22"
       - name: Run lead engine tests
         run: node --test sales_agent/lead_engine.test.js
+      - name: Run protected API route tests
+        run: node --test routes/sales.test.js
