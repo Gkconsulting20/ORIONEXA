@@ -73,6 +73,10 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
 });
 
+app.get('/sales', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'sales.html'));
+});
+
 app.get('/applications', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'applications.html'));
 });
