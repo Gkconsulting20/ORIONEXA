@@ -1,0 +1,20 @@
+name: ORIONEXA-SALES tests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "sales_agent/**"
+      - ".github/workflows/orionexa-sales-test.yml"
+  workflow_dispatch:
+
+jobs:
+  sales-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run lead engine tests
+        run: node --test sales_agent/lead_engine.test.js
