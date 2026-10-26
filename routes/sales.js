@@ -43,7 +43,7 @@ function registerSalesRoutes(app, pool, requireAdmin) {
       res.status(201).json({
         success: true,
         lead,
-        nextAction: recommendNextAction(lead)
+        nextAction: recommendNextAction(req.body || {})
       });
     } catch (error) {
       if (error instanceof TypeError) return res.status(400).json({ success: false, message: error.message });
