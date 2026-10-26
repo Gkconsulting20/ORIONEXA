@@ -4,6 +4,7 @@ const fs = require('fs');
 const { Pool } = require('pg');
 const { handleChatMessage } = require('./routes/chatbot');
 const { registerAdminAuth, requireAdmin } = require('./lib/adminAuth');
+const { registerSalesRoutes } = require('./routes/sales');
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 });
 
 registerAdminAuth(app);
+registerSalesRoutes(app, pool, requireAdmin);
 app.get('/admin', (req, res) => res.redirect('/newsletter?admin=true'));
 
 app.get('/services', (req, res) => {
