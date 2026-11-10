@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ORIONEXA-SALES | Pipeline commercial</title>
+  <style>
+    :root{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f4f6fa}
+    *{box-sizing:border-box}body{margin:0}header{background:#14233b;color:white;padding:22px clamp(16px,4vw,44px)}
+    header h1{margin:0;font-size:1.45rem}header p{margin:6px 0 0;color:#d3dcec}
+    main{max-width:1180px;margin:24px auto;padding:0 16px 40px;display:grid;gap:20px}
+    .panel{background:white;border:1px solid #e0e5ee;border-radius:14px;padding:20px;box-shadow:0 4px 18px #1720330a}
+    h2{font-size:1.08rem;margin:0 0 16px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    label{display:grid;gap:6px;font-size:.9rem;color:#35415a}input,select,textarea{width:100%;border:1px solid #cbd3e0;border-radius:8px;padding:10px;font:inherit;background:white}
+    textarea{min-height:82px;resize:vertical}.wide{grid-column:1/-1}.check{display:flex;align-items:center;gap:9px}.check input{width:auto}
+    button{border:0;border-radius:8px;padding:10px 14px;background:#2458a6;color:white;font:inherit;font-weight:600;cursor:pointer}
+    button.secondary{background:#e9eef7;color:#203a63}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+    .toolbar select{max-width:230px}.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{text-align:left;padding:12px 10px;border-bottom:1px solid #edf0f5;vertical-align:top;font-size:.9rem}
+    th{font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:#63708a}td small{display:block;color:#6c7890;margin-top:4px}.score{font-weight:700;font-variant-numeric:tabular-nums}
+    .notice{padding:11px 13px;border-radius:8px;background:#eef4ff;color:#23416e;margin-bottom:12px}.notice.error{background:#fff0ef;color:#9b2923}
+    .muted{color:#6c7890;font-size:.9rem}.hidden{display:none}
+    @media(max-width:650px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.panel{padding:15px}}
+  </style>
+</head>
+<body>
+<header><h1>ORIONEXA-SALES</h1><p>Qualification et suivi des prospects — les prises de contact restent manuelles.</p></header>
+<main>
+  <section class="panel">
+    <h2>Ajouter un prospect</h2>
+    <div id="notice" class="notice hidden" role="status"></div>
+    <form id="lead-form" class="grid">
+      <label>Entreprise *<input name="company" required maxlength="160"></label>
+      <label>Nom du contact<input name="contactName" maxlength="160"></label>
+      <label>Email professionnel<input name="email" type="email" maxlength="254"></label>
+      <label>Téléphone<input name="phone" maxlength="40"></label>
+      <label>Secteur<input name="sector" maxlength="100"></label>
+      <label>Budget indicatif<input name="budgetRange" maxlength="80" placeholder="Ex. 50 000–100 000 FCFA/mois"></label>
+      <label class="wide">Besoin exprimé<textarea name="need" maxlength="2000"></textarea></label>
+      <label>Origine<input name="source" maxlength="80" value="manual"></label>
+      <label class="check"><input name="consentToContact" type="checkbox"> Autorisation / base légale de contact vérifiée</label>
+      <div class="wide"><button type="submit">Enregistrer le prospect</button></div>
+    </form>
+  </section>
+  <section class="panel">
+    <h2>Pipeline commercial</h2>
+    <div class="toolbar">
+      <select id="status-filter" aria-label="Filtrer par statut">
+        <option value="">Tous les statuts</option>
+        <option value="NEW">Nouveau</option><option value="QUALIFIED">Qualifié</option><option value="CONTACTED">Contacté</option>
+        <option value="MEETING">Rendez-vous</option><option value="PROPOSAL">Proposition</option><option value="WON">Gagné</option><option value="LOST">Perdu</option>
+      </select>
+      <button id="refresh" class="secondary" type="button">Actualiser</button>
+      <span id="count" class="muted"></span>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>Entreprise / contact</th><th>Besoin</th><th>Score</th><th>Statut</th></tr></thead><tbody id="leads"></tbody></table></div>
+    <p class="muted">Les données sont visibles uniquement après authentification administrateur. Ne saisissez pas de données sensibles.</p>
+  </section>
+</main>
+<script>
+(() => {
+  const statuses = [
+    ['NEW','Nouveau'],['QUALIFIED','Qualifié'],['CONTACTED','Contacté'],['MEETING','Rendez-vous'],
+    ['PROPOSAL','Proposition'],['WON','Gagné'],['LOST','Perdu']
+  ];
+  const notice = document.querySelector('#notice');
+  const tbody = document.querySelector('#leads');
+  const filter = document.querySelector('#status-filter');
+  const count = document.querySelector('#count');
+  function message(text, error=false) {
+    notice.textContent = text;
+    notice.classList.remove('hidden','error');
+    if (error) notice.classList.add('error');
+  }
+  async function api(url, options={}) {
+    const response = await fetch(url, {credentials:'same-origin', headers:{'Content-Type':'application/json', ...(options.headers||{})}, ...options});
+    const data = await response.json().catch(() => ({}));
+    if (response.status === 401) throw new Error('Connectez-vous à l’administration ORIONEXA, puis revenez sur cette page.');
+    if (!response.ok || data.success === false) throw new Error(data.message || 'Une erreur est survenue.');
+    return data;
+  }
+  function cellText(text, parent, tag='div') {
+    const el = document.createElement(tag);
+    el.textContent = text || '—';
+    parent.appendChild(el);
+    return el;
+  }
+  function statusSelect(lead) {
+    const select = document.createElement('select');
+    select.setAttribute('aria-label', 'Statut de ' + lead.company);
+    statuses.forEach(([value,label]) => {
+      const option = document.createElement('option'); option.value=value; option.textContent=label;
+      if (value === lead.status) option.selected=true;
+      select.appendChild(option);
+    });
+    select.addEventListener('change', async () => {
+      select.disabled=true;
+      try { await api('/api/sales/leads/' + encodeURIComponent(lead.id) + '/status', {method:'PATCH', body:JSON.stringify({status:select.value})}); message('Statut commercial mis à jour.'); await load(); }
+      catch (e) { message(e.message,true); select.value=lead.status; }
+      finally { select.disabled=false; }
+    });
+    return select;
+  }
+  async function load() {
+    tbody.replaceChildren();
+    try {
+      const query = filter.value ? '?status=' + encodeURIComponent(filter.value) : '';
+      const data = await api('/api/sales/leads' + query);
+      count.textContent = data.leads.length + ' prospect(s)';
+      if (!data.leads.length) {
+        const tr=document.createElement('tr'), td=document.createElement('td'); td.colSpan=4; td.textContent='Aucun prospect pour ce filtre.'; tr.appendChild(td); tbody.appendChild(tr); return;
+      }
+      data.leads.forEach(lead => {
+        const tr=document.createElement('tr');
+        const company=document.createElement('td'); cellText(lead.company,company,'strong');
+        cellText(lead.contact_name,company,'small'); cellText(lead.email,company,'small'); tr.appendChild(company);
+        const need=document.createElement('td'); cellText(lead.need,need); cellText(lead.sector,need,'small'); tr.appendChild(need);
+        const score=document.createElement('td'); const scoreEl=cellText(String(lead.score ?? 0),score,'span'); scoreEl.className='score'; tr.appendChild(score);
+        const status=document.createElement('td'); status.appendChild(statusSelect(lead)); tr.appendChild(status);
+        tbody.appendChild(tr);
+      });
+    } catch (e) { message(e.message,true); count.textContent=''; }
+  }
+  document.querySelector('#lead-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    const form=event.currentTarget;
+    const raw=Object.fromEntries(new FormData(form).entries());
+    raw.consentToContact = form.elements.consentToContact.checked;
+    try {
+      const data=await api('/api/sales/leads',{method:'POST',body:JSON.stringify(raw)});
+      message('Prospect enregistré. Prochaine étape : ' + data.nextAction.label + '.');
+      form.reset(); form.elements.source.value='manual'; await load();
+    } catch(e) { message(e.message,true); }
+  });
+  document.querySelector('#refresh').addEventListener('click',load);
+  filter.addEventListener('change',load);
+  load();
+})();
+</script>
+</body>
+</html>
