@@ -1,4 +1,4 @@
-import { handleApiRequest } from "./api.mjs";
+import { handleApiRequest, generateNewsletter } from "./api.mjs";
 import { handleOrionGrokProxy } from "./orion-grok-proxy.mjs";
 
 const PAGE_ASSETS = new Map([
@@ -55,5 +55,32 @@ export default {
         { status: 500, headers: { "Content-Type": "application/json; charset=utf-8" } }
       ));
     }
+  },
+
+  // Génération hebdomadaire de la newsletter, chaque vendredi à 07:00 UTC
+  // (07:00 à Lomé, sans décalage). Génère le numéro et le stocke en base
+  // (statut « generated ») — l'ENVOI reste manuel (bouton admin), pour
+  // garder une relecture humaine avant chaque envoi.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil((async () => {
+      try {
+        // Garde anti-doublon : ne pas générer 2 numéros la même semaine
+        // (par exemple si le déclencheur est rejoué après une erreur).
+        const latest = await env.DB.prepare(
+          "SELECT MAX(created_at) AS created_at FROM generated_newsletters"
+        ).first();
+        const last = latest?.created_at ? new Date(latest.created_at).getTime() : 0;
+        if (Number.isFinite(last) && Date.now() - last < 6 * 86400000) {
+          console.log("Newsletter hebdomadaire déjà générée récemment, génération ignorée.");
+          return;
+        }
+        const request = new Request("https://orionexa.net/api/newsletters", { method: "GET" });
+        const newsletter = await generateNewsletter(request, env);
+        console.log("Newsletter hebdomadaire générée :", newsletter.issue, newsletter.subject);
+      } catch (error) {
+        console.error("Échec de la génération hebdomadaire de la newsletter :", error);
+        throw error;
+      }
+    })());
   }
 };

@@ -152,7 +152,7 @@
                     </div>
                     <div class="frequency-card">
                         <i class="fas fa-users"></i>
-                        <h4>+500 abonnés</h4>
+                        <h4><span id="public-subscriber-count">…</span> abonnés</h4>
                         <p>Entrepreneurs & Dirigeants</p>
                     </div>
                     <div class="frequency-card">
@@ -339,6 +339,15 @@
         }
 
         loadArchives();
+
+        // Nombre réel d'abonnés (public) — remplace l'ancien « +500 abonnés »
+        fetch('/api/newsletter-subscribers/count')
+            .then(r => r.json())
+            .then(data => {
+                const el = document.getElementById('public-subscriber-count');
+                if (el) el.textContent = data.count || 0;
+            })
+            .catch(() => {});
 
         // Admin functionality
         let isAdmin = false;

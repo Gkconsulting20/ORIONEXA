@@ -310,7 +310,7 @@ function newsletterHtml(issue, content, date) {
 </html>`;
 }
 
-async function generateNewsletter(request, env) {
+export async function generateNewsletter(request, env) {
   const db = requireDatabase(env);
   if (!env.AI) throw new Error("Le binding Workers AI n’est pas configuré.");
 
