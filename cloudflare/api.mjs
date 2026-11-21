@@ -312,7 +312,7 @@ function newsletterHtml(issue, content, date) {
 <body>
   <div class="header"><h1>Newsletter Orionexa</h1><div class="issue">N°${issue} - Actualité Économique Hebdomadaire</div><div class="date">${escapeHtml(date)}</div></div>
   <div class="content">${cleanGeneratedHtml(content)}</div>
-  <div class="footer"><p><strong>Orionexa</strong> - La gestion moderne, sans limites.</p><p>Comptabilité • Fiscalité • Digitalisation • Formation</p><p><a href="https://orionexa.com">www.orionexa.com</a> | contact@orionexa.com</p><p style="font-size:12px;color:#999">Pour vous désinscrire, contactez contact@orionexa.com</p></div>
+  <div class="footer"><p><strong>Orionexa</strong> - La gestion moderne, sans limites.</p><p>Comptabilité • Fiscalité • Digitalisation • Formation</p><p><a href="https://orionexa.net">www.orionexa.net</a> | contact@orionexa.net</p><p style="font-size:12px;color:#999">Pour vous désinscrire, contactez contact@orionexa.net</p></div>
 </body>
 </html>`;
 }
@@ -439,7 +439,7 @@ async function sendNewsletterEmail(apiKey, subscriber, newsletter, htmlContent) 
     body: JSON.stringify({
       sender: { name: "Orionexa", email: "gkconsulting20@gmail.com" },
       to: [{ email: subscriber.email, name }],
-      replyTo: { email: "contact@orionexa.com", name: "Orionexa" },
+      replyTo: { email: "contact@orionexa.net", name: "Orionexa" },
       subject: newsletter.subject,
       htmlContent: personalizedHtml
     })
@@ -447,7 +447,7 @@ async function sendNewsletterEmail(apiKey, subscriber, newsletter, htmlContent) 
   return response.ok;
 }
 
-async function sendLatestNewsletter(request, env) {
+export async function sendLatestNewsletter(request, env) {
   if (!env.BREVO_API_KEY) {
     throw new Error("La clé BREVO_API_KEY doit être configurée dans Cloudflare.");
   }
