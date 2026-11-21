@@ -16,7 +16,7 @@ Cette configuration prépare le site pour Cloudflare Workers, Cloudflare D1 et W
 3. Appliquer le schéma avec `npx wrangler d1 migrations apply orionexa-data --remote`.
 4. Ajouter les secrets Cloudflare avec `npx wrangler secret put ADMIN_PASSWORD`, `npx wrangler secret put SESSION_SECRET` et `npx wrangler secret put BREVO_API_KEY`. Wrangler demande chaque valeur sans l’afficher dans le code. `SESSION_SECRET` doit contenir au moins 32 caractères aléatoires.
 5. Pour générer des newsletters fondées sur des nouvelles récentes, ajouter aussi `SERPER_API_KEY`. Sans cette clé, la génération échoue clairement au lieu d’inventer des actualités.
-6. Les réponses du chatbot et la génération de newsletter utilisent `@cf/qwen/qwen3-30b-a3b-fp8` via le binding Workers AI `AI`. Qwen3-30B-A3B est sous licence Apache 2.0 et active environ 3,3 milliards de paramètres par réponse; aucune clé OpenAI de Replit n’est réutilisée.
+6. Les réponses du chatbot et la génération de newsletter utilisent les modèles Workers AI `@cf/meta/llama-3.1-8b-instruct` (principal) et `@cf/google/gemma-3-12b-it` (secours) via le binding Workers AI `AI`. Le modèle Qwen3-30B utilisé avant a été retiré par Cloudflare le 2026-11-20, ce qui avait cassé le chatbot ; le code essaie désormais le modèle de secours si le premier ne répond pas. Aucune clé OpenAI de Replit n’est réutilisée.
 
 Workers AI est appelé uniquement lorsqu’une requête utilise le chatbot ou génère une newsletter. Vérifier les tarifs Cloudflare du compte avant d’activer ces fonctions.
 

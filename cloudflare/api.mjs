@@ -1,7 +1,14 @@
 import { CHAT_SYSTEM_PROMPT, NEWSLETTER_SYSTEM_PROMPT } from "./prompts.mjs";
 import { mergeNewsletterIndexes } from "./newsletter-index.mjs";
 
-const AI_MODEL = "@cf/qwen/qwen3-30b-a3b-fp8";
+// Modèles Workers AI pour le chatbot (ordre de préférence).
+// Le modèle Qwen3-30B a été retiré par Cloudflare le 2026-11-20, ce qui a
+// cassé le chatbot du jour au lendemain : on garde donc un modèle de
+// secours, essayé automatiquement si le premier ne répond pas.
+const AI_MODELS = [
+  "@cf/meta/llama-3.1-8b-instruct",
+  "@cf/google/gemma-3-12b-it"
+];
 const SESSION_COOKIE = "orionexa_admin";
 const SESSION_LIFETIME_SECONDS = 8 * 60 * 60;
 const encoder = new TextEncoder();
@@ -348,17 +355,14 @@ Rédige en HTML avec h2, h3, p, ul, li et strong :
 6. Chiffre clé uniquement si une statistique vérifiable apparaît dans les sources.
 
 Ton professionnel et accessible. N'inclus pas de document HTML complet ni de balises script.`;
-  const result = await env.AI.run(AI_MODEL, {
-    messages: [
+  const rawContent = await askCloudflareAI(
+    env,
+    [
       { role: "system", content: NEWSLETTER_SYSTEM_PROMPT },
       { role: "user", content: prompt }
     ],
-    max_tokens: 2500,
-    temperature: 0.7
-  });
-  const rawContent =
-    typeof result === "string" ? result : result?.response || result?.result;
-  if (!rawContent) throw new Error("Workers AI n’a pas retourné de contenu.");
+    2500
+  );
 
   const content = String(rawContent)
     .replace(/```html\n?/gi, "")
@@ -529,16 +533,26 @@ async function testEmailConnection(env) {
 
 async function askCloudflareAI(env, messages, maxTokens) {
   if (!env.AI) throw new Error("Le binding Workers AI n’est pas configuré.");
-  const result = await env.AI.run(AI_MODEL, {
-    messages,
-    max_tokens: maxTokens,
-    temperature: 0.7
-  });
-  const answer = typeof result === "string" ? result : result?.response || result?.result;
-  if (typeof answer !== "string" || !answer.trim()) {
-    throw new Error("Workers AI n’a pas retourné de réponse.");
+  let lastError = null;
+  for (const model of AI_MODELS) {
+    try {
+      const result = await env.AI.run(model, {
+        messages,
+        max_tokens: maxTokens,
+        temperature: 0.7
+      });
+      const answer = typeof result === "string" ? result : result?.response || result?.result;
+      if (typeof answer === "string" && answer.trim()) {
+        return answer.trim();
+      }
+      lastError = new Error("Workers AI n’a pas retourné de réponse.");
+    } catch (error) {
+      // Modèle retiré ou indisponible : on essaie le suivant.
+      lastError = error;
+      console.error(`Workers AI (${model}) a échoué :`, error);
+    }
   }
-  return answer.trim();
+  throw lastError || new Error("Workers AI n’a pas retourné de réponse.");
 }
 
 export async function handleApiRequest(request, env) {
