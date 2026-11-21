@@ -7,7 +7,7 @@ import { mergeNewsletterIndexes } from "./newsletter-index.mjs";
 // secours, essayé automatiquement si le premier ne répond pas.
 const AI_MODELS = [
   "@cf/meta/llama-3.1-8b-instruct",
-  "@cf/google/gemma-3-12b-it"
+  "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
 ];
 const SESSION_COOKIE = "orionexa_admin";
 const SESSION_LIFETIME_SECONDS = 8 * 60 * 60;
@@ -541,7 +541,14 @@ async function askCloudflareAI(env, messages, maxTokens) {
         max_tokens: maxTokens,
         temperature: 0.7
       });
-      const answer = typeof result === "string" ? result : result?.response || result?.result;
+      // Le format de réponse varie selon le modèle : texte brut, {response},
+      // {result}, ou forme OpenAI {choices:[{message:{content}}]}.
+      const answer =
+        typeof result === "string"
+          ? result
+          : result?.response ||
+            result?.result ||
+            result?.choices?.[0]?.message?.content;
       if (typeof answer === "string" && answer.trim()) {
         return answer.trim();
       }
